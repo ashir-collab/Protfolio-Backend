@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.9.1",
   "engineVersion": "e922089b7d7502aff4249d5da3420f6fa55fc6ad",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel ContactMessage {\n  id        String        @id @default(uuid())\n  name      String\n  email     String\n  message   String\n  status    ContactStatus @default(UNREAD)\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n}\n\nenum ContactStatus {\n  UNREAD\n  READ\n  REPLIED\n  ARCHIVED\n}\n",
+  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"../generated/prisma\"\n  // Nest compiles to CommonJS; the default ESM output uses `import.meta.url`,\n  // which makes Node load the emitted .js as ESM and crash on `exports`.\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel ContactMessage {\n  id        String        @id @default(uuid())\n  name      String\n  email     String\n  message   String\n  status    ContactStatus @default(UNREAD)\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n}\n\nenum ContactStatus {\n  UNREAD\n  READ\n  REPLIED\n  ARCHIVED\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -45,10 +45,10 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.js"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.js")
     return await decodeBase64AsWasm(wasm)
   },
 

@@ -1,6 +1,9 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  // Nest compiles to CommonJS; the default ESM output uses `import.meta.url`,
+  // which makes Node load the emitted .js as ESM and crash on `exports`.
+  moduleFormat = "cjs"
 }
 
 datasource db {
