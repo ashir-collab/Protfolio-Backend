@@ -20,7 +20,7 @@ Role:
 Full-Stack Web Developer
 
 Location:
-Karachi, Pakistan
+Islamabad, Pakistan
 
 Overview:
 Full-stack web developer working across React, Next.js, TypeScript, and NestJS,
