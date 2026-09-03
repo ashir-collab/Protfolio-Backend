@@ -8,8 +8,8 @@ export class ChatService {
     apiKey: process.env.GEMINI_API_KEY,
   });
 
-  async chat(message: string) {
-    const response = await this.gemini.models.generateContent({
+  async *chat(message: string) {
+    const stream = await this.gemini.models.generateContentStream({
       model: 'gemini-3.6-flash',
       contents: message,
       config: {
@@ -17,8 +17,10 @@ export class ChatService {
       },
     });
 
-    return {
-      reply: response.text,
-    };
+    for await (const chunk of stream) {
+      if (chunk.text) {
+        yield chunk.text;
+      }
+    }
   }
 }
