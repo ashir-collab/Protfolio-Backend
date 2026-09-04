@@ -55,9 +55,9 @@ Database:
 
 EXPERIENCE:
 
-Computerized.ai (AI Software Agency, Karachi)
+Computerized.ai (AI Software Agency, UK)
 Web Developer
-July 2024 - Present
+Nov 2025 - Present
 - Building the Computerized.ai company website: a premium, 3D-animated
   Next.js experience using React Three Fiber, GSAP, Lenis, and Framer Motion.
 - Design system: dark ink-black / amber-gold palette; Cormorant Garamond,
